@@ -5,6 +5,7 @@ const findAll = async () => {
   const [products] = await connection.execute(
     'SELECT * FROM products',
   );
+  console.log('teste camelize: ', camelize(products));
   return camelize(products);
 };
 
