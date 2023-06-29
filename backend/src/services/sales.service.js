@@ -1,5 +1,10 @@
-// const { salesModel } = require('../models');
+const { salesModel } = require('../models');
 
-// const exampleSales = {
-//   date: '2023-06-29 04:11:25',
-// };
+const findAll = async () => {
+  const sales = await salesModel.findAll();
+  return { status: 'OK', data: sales };
+};
+
+module.exports = {
+  findAll,
+};
