@@ -6,6 +6,13 @@ const findProducts = async (_req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const findProductsById = async (req, res) => {
+  const { id } = req.params;
+  const { status, data } = await productsService.findById(id);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   findProducts,
+  findProductsById,
 };

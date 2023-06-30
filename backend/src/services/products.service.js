@@ -5,6 +5,14 @@ const findAll = async () => {
   return { status: 'OK', data: products };
 };
 
+const findById = async (ProductId) => {
+  const product = await productsModel.findById(ProductId);
+  if (!product) return { status: 'NOT_FOUND', data: { message: 'Product not found' } };
+
+  return { status: 'OK', data: product };
+};
+
 module.exports = {
   findAll,
+  findById,
 };

@@ -5,10 +5,20 @@ const findAll = async () => {
   const [products] = await connection.execute(
     'SELECT * FROM products',
   );
-  console.log('teste camelize: ', camelize(products));
+
   return camelize(products);
+};
+
+const findById = async (ProductId) => {
+  const [[product]] = await connection.execute(
+    'SELECT * FROM products WHERE id = ? ORDER BY id ASC', 
+    [ProductId],
+    );
+
+  return product;
 };
 
 module.exports = {
   findAll,
+  findById,
 };
