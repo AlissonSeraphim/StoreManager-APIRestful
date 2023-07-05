@@ -12,7 +12,22 @@ const findById = async (saleId) => {
   return { status: 'OK', data: sale };
 };
 
+const insertSales = async (sales) => {
+  const saleId = await salesModel.insertSales();
+
+  console.log('saleId', saleId);
+
+  sales.forEach((sale) => salesModel.insertSaleProductId(
+    saleId,
+    sale.productId,
+    sale.quantity,
+    ));
+
+  return { status: 'CREATED', data: { id: saleId, itemsSold: sales } };
+};
+
 module.exports = {
   findAll,
   findById,
+  insertSales,
 };

@@ -14,7 +14,6 @@ const findById = async (ProductId) => {
     'SELECT * FROM products WHERE id = ? ORDER BY id ASC', 
     [ProductId],
     );
-
   return product;
 };
 
