@@ -14,6 +14,9 @@ allSalesServiceMock,
 saleIdServiceMock,
 saleIdServiceNotFound,
 messageSaleNotFound,
+insertSalesMock,
+productsToInsertMock,
+insertSalesServiceMock,
 } = require('../mocks/sales.mock');
 
 describe('Testes - Sales Service:', function () {
@@ -56,6 +59,20 @@ describe('Testes - Sales Service:', function () {
     await salesController.findSales(undefined, res);
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(allSalesMockModel);
+  });
+
+  it('Insere Sales com sucesso - Status 201/Created', async function () {
+    sinon.stub(salesService, 'insertSales').resolves(insertSalesMock);
+
+    const req = { body: productsToInsertMock };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await salesController.insertSales(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(insertSalesServiceMock.data);
   });
 
   afterEach(function () {

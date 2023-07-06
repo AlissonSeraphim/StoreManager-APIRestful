@@ -36,7 +36,7 @@ describe('Testes - Sales Model:', function () {
     expect(sale).to.be.deep.equal(allSalesMockModel);
   });
 
-  it('Registrando Sale com sucesso status 201/CREATED', async function () {
+  it('Registrando Sale', async function () {
     sinon.stub(connection, 'execute').resolves(saleIdDB);
 
     const saleId = await salesModel.insertSales();
@@ -45,7 +45,7 @@ describe('Testes - Sales Model:', function () {
     expect(saleId).to.equal(saleIdModel);
   });
 
-  it('Registrando multiplos Products pela mesma Sale com sucesso status 201/CREATED', async function () {
+  it('Registrando multiplos Products pela mesma Sale', async function () {
     sinon.stub(connection, 'execute')
     .onFirstCall()
     .resolves(saleIdDB)

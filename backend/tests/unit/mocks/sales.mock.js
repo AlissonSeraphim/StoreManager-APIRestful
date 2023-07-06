@@ -119,6 +119,32 @@ const productByIdMockDB = [[
       productId: 1,
       quantity: 5,
     }];
+  
+  const productsToInsertMock = [
+    {
+      productId: 1,
+      quantity: 4,
+    },
+    {
+      productId: 2,
+      quantity: 5,
+    },
+  ];
+
+  const insertSalesMock = { status: 'CREATED',
+data: { 
+    id: saleIdModel, 
+    itemsSold: productsToInsertMock, 
+  } };
+
+  const insertSalesServiceMock = { status: 'CREATED',
+  data: { 
+      id: saleIdModel, 
+      itemsSold: productsToInsertMock, 
+    } };
+    
+  const notAvailableProductIdReturn = { status: 'NOT_FOUND',
+  data: { message: 'Product not found' } };
 
 module.exports = {
   allSalesDBMock,
@@ -137,4 +163,8 @@ module.exports = {
   productIdMockDB,
   productByIdMockDB,
   productByIdMockModel,
+  productsToInsertMock,
+  insertSalesMock,
+  notAvailableProductIdReturn,
+  insertSalesServiceMock,
 };
