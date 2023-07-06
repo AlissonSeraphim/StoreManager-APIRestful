@@ -55,6 +55,28 @@ const productIdServiceNotFound = {
   data: messageProductNotFound,
 };
 
+const productToInsert = {
+  name: 'ProdutoX',
+};
+
+const insertedProductDB = {
+  id: 4,
+  name: 'ProdutoX',
+};
+
+const insertedProductModel = {
+  id: 4,
+  name: 'ProdutoX',
+};
+
+const noNameInsertMessage = { message: '"name" is required' };
+
+const incorrectNameLength = { name: 'Prod' };
+
+const InvalidLengthMessage = { message: '"name" length must be at least 5 characters long' };
+
+const insertedProductService = { status: 'CREATED', data: insertedProductModel };
+
 module.exports = {
   messageProductNotFound,
   productIdFromModel,
@@ -64,4 +86,11 @@ module.exports = {
   allProductsServiceOK,
   productIdServiceOK,
   productIdServiceNotFound,
+  productToInsert,
+  insertedProductDB,
+  insertedProductModel,
+  noNameInsertMessage,
+  incorrectNameLength,
+  InvalidLengthMessage,
+  insertedProductService,
 };

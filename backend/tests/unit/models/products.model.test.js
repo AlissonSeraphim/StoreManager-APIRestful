@@ -5,7 +5,10 @@ const { productsModel } = require('../../../src/models');
 const { productIdFromDB, 
   productIdFromModel, 
   allProductsFromDB, 
-  allProductsFromModel, 
+  allProductsFromModel,
+  productToInsert,
+  insertedProductDB,
+  insertedProductModel, 
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Model:', function () {
@@ -26,6 +29,15 @@ describe('Testes - Products Model:', function () {
 
     expect(products).to.be.an('array');
     expect(products).to.be.deep.equal(allProductsFromModel);
+  });
+
+  it('Adicionando Product', async function () {
+    sinon.stub(connection, 'execute').resolves([[insertedProductDB]]);
+
+    const products = await productsModel.insertProduct(productToInsert.name);
+
+    expect(products).to.be.an('object');
+    expect(products).to.be.deep.equal(insertedProductModel);
   });
 
   afterEach(function () {

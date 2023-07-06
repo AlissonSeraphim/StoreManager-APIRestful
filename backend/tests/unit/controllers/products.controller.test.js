@@ -14,6 +14,8 @@ const {
   allProductsFromModel,
   productIdFromModel,
   messageProductNotFound,
+  productToInsert,
+  insertedProductService,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Service:', function () {
@@ -56,6 +58,21 @@ describe('Testes - Products Service:', function () {
     await productsController.findProducts(undefined, res);
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(allProductsFromModel);
+  });
+
+  it('Insere Product com sucesso - Status 201/Created', async function () {
+    sinon.stub(productsService, 'insertProduct').resolves(insertedProductService);
+
+    const req = { body: productToInsert };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await productsController.insertProduct(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(insertedProductService.data);
   });
 
   afterEach(function () {
