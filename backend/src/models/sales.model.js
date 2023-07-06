@@ -33,18 +33,27 @@ const findById = async (saleId) => {
 };
 
 const insertSaleProductId = async (saleId, productId, quantity) => {
-  await connection.execute(
+  const [{ affectedRows }] = await connection.execute(
     'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)', 
     [saleId, productId, quantity],
     );
+    return affectedRows;
 };
 
 const insertSales = async () => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.sales (date) VALUE (CURRENT_TIMESTAMP());',
   );
-
   return insertId;
+};
+
+const findByProductId = async (productId) => {
+  const [productIdExist] = await connection.execute(
+    'SELECT * FROM StoreManager.sales_products WHERE product_id = (?)',
+    [productId],
+  );
+
+  return camelize(productIdExist);
 };
 
 module.exports = {
@@ -52,4 +61,5 @@ module.exports = {
   findById,
   insertSales,
   insertSaleProductId,
+  findByProductId,
 };

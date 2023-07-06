@@ -85,6 +85,41 @@ const saleIdServiceNotFound = {
   data: messageSaleNotFound,
 };
 
+const saleIdDB = [{ insertId: 3 }];
+
+const saleIdModel = 3;
+
+const affectedRowsDB = [{ affectedRows: 1 }];
+
+const affectedRowsModel = 1;
+
+const insertMultipleSalesMock = [
+  {
+    productId: 1,
+    quantity: 1,
+  },
+  {
+    productId: 2,
+    quantity: 5,
+  },
+];
+
+const productIdMockDB = 1;
+
+const productByIdMockDB = [[
+  {
+    saleId: 1,
+    productId: 1,
+    quantity: 5,
+  }]];
+
+  const productByIdMockModel = [
+    {
+      saleId: 1,
+      productId: 1,
+      quantity: 5,
+    }];
+
 module.exports = {
   allSalesDBMock,
   allSalesMockModel,
@@ -94,4 +129,12 @@ module.exports = {
   saleIdServiceMock,
   allSalesServiceMock,
   messageSaleNotFound,
+  saleIdDB,
+  insertMultipleSalesMock,
+  saleIdModel,
+  affectedRowsDB,
+  affectedRowsModel,
+  productIdMockDB,
+  productByIdMockDB,
+  productByIdMockModel,
 };
