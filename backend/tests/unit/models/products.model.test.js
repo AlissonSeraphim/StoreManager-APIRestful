@@ -8,7 +8,10 @@ const { productIdFromDB,
   allProductsFromModel,
   productToInsert,
   insertedProductDB,
-  insertedProductModel, 
+  insertedProductModel,
+  productToUpdate,
+  productUpdatedDB,
+  productUpdatedModel,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Model:', function () {
@@ -38,6 +41,19 @@ describe('Testes - Products Model:', function () {
 
     expect(products).to.be.an('object');
     expect(products).to.be.deep.equal(insertedProductModel);
+  });
+
+  it('Atualizando Product pelo ProductId', async function () {
+    sinon.stub(connection, 'execute')
+    .onFirstCall()
+    .resolves(null)
+    .onSecondCall()
+    .resolves(productUpdatedDB);
+
+    const products = await productsModel.updateProduct(productToUpdate.name, productToUpdate.id);
+
+    expect(products).to.be.an('object');
+    expect(products).to.be.deep.equal(productUpdatedModel);
   });
 
   afterEach(function () {

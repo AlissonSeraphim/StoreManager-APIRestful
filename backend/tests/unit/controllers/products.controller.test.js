@@ -16,6 +16,10 @@ const {
   messageProductNotFound,
   productToInsert,
   insertedProductService,
+  productUpdatedService,
+  productToUpdateBody,
+  productIdToUpdate,
+  productUpdatedModel,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Service:', function () {
@@ -73,6 +77,23 @@ describe('Testes - Products Service:', function () {
     await productsController.insertProduct(req, res);
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(insertedProductService.data);
+  });
+  
+  it('Atualiza Product pelo productId com sucesso - Status 200/OK', async function () {
+    sinon.stub(productsService, 'updateProduct').resolves(productUpdatedService);
+
+    const req = { body: { name: productToUpdateBody }, 
+      params: { id: productIdToUpdate },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await productsController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productUpdatedModel);
   });
 
   afterEach(function () {

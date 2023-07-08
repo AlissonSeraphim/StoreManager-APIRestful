@@ -38,7 +38,7 @@ const updateProduct = async (productName, id) => {
   );
 
   const [[updatedProduct]] = await connection.execute(
-    'SELECT * FROM products WHERE id = ?;', 
+    'SELECT * FROM products WHERE id = (?);', 
     [id], 
   );
 

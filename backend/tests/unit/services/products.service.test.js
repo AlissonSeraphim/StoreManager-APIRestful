@@ -13,6 +13,10 @@ const { productIdFromDB,
   noNameInsertMessage,
   incorrectNameLength,
   InvalidLengthMessage,
+  productToUpdate,
+  productUpdatedModel,
+  invalidProductIdToUpdate,
+  invalidProductIdMessage,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Service:', function () {
@@ -70,6 +74,25 @@ describe('Testes - Products Service:', function () {
 
     expect(productsResponse.status).to.equal('INVALID_VALUE');
     expect(productsResponse.data).to.be.deep.equal(InvalidLengthMessage);
+  });
+
+  it('Atualiza o Product pelo productId', async function () {
+    sinon.stub(productsModel, 'findById').resolves(productUpdatedModel);
+    sinon.stub(productsModel, 'updateProduct').resolves(productUpdatedModel);
+
+    const productsResponse = await productsService.updateProduct(productToUpdate.name, productToUpdate.id);
+
+    expect(productsResponse.status).to.equal('OK');
+    expect(productsResponse.data).to.be.deep.equal(productUpdatedModel);
+  });
+
+  it('Tenta atualizar o Product com productId Inexistente', async function () {
+    sinon.stub(productsModel, 'findById').resolves(undefined);
+
+    const productsResponse = await productsService.updateProduct(invalidProductIdToUpdate.name, invalidProductIdToUpdate.id);
+
+    expect(productsResponse.status).to.equal('NOT_FOUND');
+    expect(productsResponse.data).to.be.deep.equal(invalidProductIdMessage);
   });
 
   afterEach(function () {

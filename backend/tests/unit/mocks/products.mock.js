@@ -77,6 +77,34 @@ const InvalidLengthMessage = { message: '"name" length must be at least 5 charac
 
 const insertedProductService = { status: 'CREATED', data: insertedProductModel };
 
+const productName = 'Martelo do Batman';
+const productToUpdate = {
+  id: 1,
+  name: productName,
+};
+
+const productUpdatedDB = [[{
+  id: 1,
+  name: productName,
+}]];
+
+const productUpdatedModel = {
+  id: 1,
+  name: productName,
+};
+
+const productUpdatedService = { status: 'OK', data: productUpdatedModel };
+
+const invalidProductIdToUpdate = {
+  id: 6,
+  name: productName,
+};
+
+const invalidProductIdMessage = { message: 'Product not found' };
+
+const productToUpdateBody = { name: productName };
+const productIdToUpdate = 1;
+
 module.exports = {
   messageProductNotFound,
   productIdFromModel,
@@ -93,4 +121,12 @@ module.exports = {
   incorrectNameLength,
   InvalidLengthMessage,
   insertedProductService,
+  productToUpdate,
+  productUpdatedService,
+  productUpdatedDB,
+  productUpdatedModel,
+  invalidProductIdToUpdate,
+  invalidProductIdMessage,
+  productToUpdateBody,
+  productIdToUpdate,
 };
