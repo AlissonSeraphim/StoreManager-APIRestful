@@ -105,6 +105,31 @@ const invalidProductIdMessage = { message: 'Product not found' };
 const productToUpdateBody = { name: productName };
 const productIdToUpdate = 1;
 
+const productIdToDelete = 1;
+const productIdInvalidToDelete = 6;
+
+const productsAfterDeleteDB = [[
+  {
+    id: 2,
+    name: 'Traje de encolhimento',
+  },
+  {
+    id: 3,
+    name: 'Escudo do Capitão América',
+  },
+]];
+
+const productsAfterDeleteModel = [
+  { id: 2, name: 'Traje de encolhimento' },
+  { id: 3, name: 'Escudo do Capitão América' },
+];
+
+const productsDeleteService = { status: 'NO_CONTENT', data: productsAfterDeleteModel };
+
+const validateNameBadRequest = { message: '"name" is required' };
+
+const validateNameInvalidName = { message: '"name" length must be at least 5 characters long' };
+
 module.exports = {
   messageProductNotFound,
   productIdFromModel,
@@ -129,4 +154,11 @@ module.exports = {
   invalidProductIdMessage,
   productToUpdateBody,
   productIdToUpdate,
+  productIdToDelete,
+  productsAfterDeleteDB,
+  productsAfterDeleteModel,
+  productIdInvalidToDelete,
+  productsDeleteService,
+  validateNameBadRequest,
+  validateNameInvalidName,
 };

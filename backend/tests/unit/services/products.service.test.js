@@ -17,6 +17,9 @@ const { productIdFromDB,
   productUpdatedModel,
   invalidProductIdToUpdate,
   invalidProductIdMessage,
+  productsAfterDeleteModel,
+  productIdToDelete,
+  productIdInvalidToDelete,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Service:', function () {
@@ -90,6 +93,25 @@ describe('Testes - Products Service:', function () {
     sinon.stub(productsModel, 'findById').resolves(undefined);
 
     const productsResponse = await productsService.updateProduct(invalidProductIdToUpdate.name, invalidProductIdToUpdate.id);
+
+    expect(productsResponse.status).to.equal('NOT_FOUND');
+    expect(productsResponse.data).to.be.deep.equal(invalidProductIdMessage);
+  });
+
+  it('Deleta o Product pelo productId', async function () {
+    sinon.stub(productsModel, 'findById').resolves(productsAfterDeleteModel);
+    sinon.stub(productsModel, 'deleteProduct').resolves(productsAfterDeleteModel);
+
+    const productsResponse = await productsService.deleteProduct(productIdToDelete);
+
+    expect(productsResponse.status).to.equal('NO_CONTENT');
+    expect(productsResponse.data).to.be.deep.equal(productsAfterDeleteModel);
+  });
+
+  it('Tenta deletar um Product com productId Inexistente', async function () {
+    sinon.stub(productsModel, 'findById').resolves(undefined);
+
+    const productsResponse = await productsService.deleteProduct(productIdInvalidToDelete);
 
     expect(productsResponse.status).to.equal('NOT_FOUND');
     expect(productsResponse.data).to.be.deep.equal(invalidProductIdMessage);

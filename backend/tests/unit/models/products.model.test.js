@@ -12,6 +12,9 @@ const { productIdFromDB,
   productToUpdate,
   productUpdatedDB,
   productUpdatedModel,
+  productIdToDelete,
+  productsAfterDeleteDB,
+  productsAfterDeleteModel,
 } = require('../mocks/products.mock');
 
 describe('Testes - Products Model:', function () {
@@ -54,6 +57,19 @@ describe('Testes - Products Model:', function () {
 
     expect(products).to.be.an('object');
     expect(products).to.be.deep.equal(productUpdatedModel);
+  });
+
+  it('Deleta um Product pelo ProductId', async function () {
+    sinon.stub(connection, 'execute')
+    .onFirstCall()
+    .resolves(null)
+    .onSecondCall()
+    .resolves(productsAfterDeleteDB);
+
+    const products = await productsModel.deleteProduct(productIdToDelete);
+
+    expect(products).to.be.an('array');
+    expect(products).to.be.deep.equal(productsAfterDeleteModel);
   });
 
   afterEach(function () {
