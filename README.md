@@ -42,7 +42,7 @@ Foram desenvolvidos testes unitários abrangentes para todas as funcionalidades 
 
 Este projeto não possui licença.
 
-# [EN] Sales Manager API
+# [EN] Sales Manager API Restful
 
 This project is a RESTful API for a sales management system. The API allows you to create, view, update, and delete products and sales. The API enables product listing and registration, as well as sales creation and viewing. Additionally, you can update the information of existing products and remove products from the system.
 
